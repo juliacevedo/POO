@@ -7,7 +7,7 @@ public class Entrada implements IEntrada {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+ //jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 	@Override
 	public String ubicacion() {
 		// TODO Auto-generated method stub
