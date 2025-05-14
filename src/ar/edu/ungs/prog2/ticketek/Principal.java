@@ -3,10 +3,10 @@ package ar.edu.ungs.prog2.ticketek;
 import java.util.List;
 
 public class Principal {
-	//HOOOOOOOOOOOOla
+	
 
 	public static void main(String[] args) {
-		//ITicketek ticketek = new Ticketek();  
+		ITicketek ticketek = new Ticketek();  
 		// Empresa recien creada
 		printEmpresa(ticketek, "Recien creada");
 		
