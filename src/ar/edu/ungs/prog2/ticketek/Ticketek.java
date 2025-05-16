@@ -1,13 +1,13 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Ticketek implements ITicketek{
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	private HashMap<String,Usuario> usuarios;
+	private HashMap<String,Sede> sedes;
+	private HashMap<String,Espetaculo> espectaculos;
 
 	@Override
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima) {

@@ -95,7 +95,7 @@ public interface ITicketek {
      */
     void agregarFuncion(String nombreEspectaculo, String fecha, String sede, double precioBase);
    
-    
+//  --------------  
     /**
      * 4) Vende una o varias entradas a un usuario para funciones
      * en sedes no numeradas
