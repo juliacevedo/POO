@@ -9,17 +9,27 @@ public class Ticketek implements ITicketek{
 	private HashMap<String,Espetaculo> espectaculos;
 	private HashMap<String,Entrada> entradas;
 
+	
+	
+//____________________________________INTERFAZ PUBLICA_________________________________________
+	
 	@Override
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima) {
+		if (sedes.containsKey(nombre)) {
+			throw new RuntimeException("La sede ya se encuentra registrada");
+		}
+		if (sedeConMismaDireccion(direccion)) {
+			throw new RuntimeException("La direccion de la sede es incorrecta");
+		}
+		//La capacidad se valida en el constructor.
 		
-		Sede s= new Estadio(nombre,direccion,capacidadMaxima);
-		
+		Sede s= new Estadio(nombre,direccion,capacidadMaxima); 
+		sedes.put(nombre,s);
 	}
 
 	@Override
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima, int asientosPorFila,
 			String[] sectores, int[] capacidad, int[] porcentajeAdicional) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -128,5 +138,16 @@ public class Ticketek implements ITicketek{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	
+	// ____________________________________METODOS AGREGADOS_________________________________________
+	
+	private boolean sedeConMismaDireccion(String direccion) {
+		for (Sede s : sedes.values()) {
+			if (s.devolverDireccion().equals(direccion)) {
+				return true; 
+			}
+		}
+		return false;
+	}
 }

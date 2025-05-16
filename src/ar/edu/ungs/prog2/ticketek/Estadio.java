@@ -7,6 +7,7 @@ public class Estadio extends Sede {
 	
 	public Estadio(String nombre, String direccion, int capacidadMaxima) {
 		super(nombre, direccion, capacidadMaxima);
-		super.sectores[0]= new Campo(capacidadMaxima);
+		super.sectores= new Sector[1];
+		sectores[0]= new Campo(capacidadMaxima);
 	}
 }
