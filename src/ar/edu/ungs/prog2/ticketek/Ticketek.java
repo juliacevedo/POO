@@ -7,15 +7,21 @@ public class Ticketek implements ITicketek{
 	private HashMap<String,Usuario> usuarios;
 	private HashMap<String,Sede> sedes;
 	private HashMap<String,Espetaculo> espectaculos;
-	private HashMap<String,Entrada> entradas;
+	private HashMap<String,Entrada> ventas;
 
 	
-	
+	public Ticketek() {
+        usuarios= new HashMap<>();
+        sedes = new HashMap<>();
+        espectaculos = new HashMap<>();
+        ventas = new HashMap<>();
+    }
 //____________________________________INTERFAZ PUBLICA_________________________________________
 	
 	@Override
+	//ESTADIO
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima) {
-		if (sedes.containsKey(nombre)) {
+		if (this.sedes.containsKey(nombre)) {
 			throw new RuntimeException("La sede ya se encuentra registrada");
 		}
 		if (sedeConMismaDireccion(direccion)) {
@@ -24,23 +30,45 @@ public class Ticketek implements ITicketek{
 		//La capacidad se valida en el constructor.
 		
 		Sede s= new Estadio(nombre,direccion,capacidadMaxima); 
-		sedes.put(nombre,s);
+		agregarSede(nombre,s);
 	}
 
 	@Override
+	//TEATRO
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima, int asientosPorFila,
 			String[] sectores, int[] capacidad, int[] porcentajeAdicional) {
+		if (sedes.containsKey(nombre)) {
+			throw new RuntimeException("La sede ya se encuentra registrada");
+		}
+		if (sedeConMismaDireccion(direccion)) {
+			throw new RuntimeException("La direccion de la sede es incorrecta");
+		}
+		Sede s= new Teatro(nombre,direccion,capacidadMaxima,asientosPorFila,sectores,capacidad,porcentajeAdicional); 
+		agregarSede(nombre,s);
 		
 	}
 
 	@Override
+	//MINIESTADIO
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima, int asientosPorFila,
 			int cantidadPuestos, double precioConsumicion, String[] sectores, int[] capacidad,
 			int[] porcentajeAdicional) {
-		// TODO Auto-generated method stub
+		if (sedes.containsKey(nombre)) {
+			throw new RuntimeException("La sede ya se encuentra registrada");
+		}
+		if (sedeConMismaDireccion(direccion)) {
+			throw new RuntimeException("La direccion de la sede es incorrecta");
+		}
 		
+		Sede s = new MiniEstadio(nombre,direccion,capacidadMaxima,asientosPorFila,cantidadPuestos,precioConsumicion,sectores,capacidad,porcentajeAdicional);
+		agregarSede(nombre,s);
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public void registrarUsuario(String email, String nombre, String apellido, String contrasenia) {
 		// TODO Auto-generated method stub
@@ -144,10 +172,16 @@ public class Ticketek implements ITicketek{
 	
 	private boolean sedeConMismaDireccion(String direccion) {
 		for (Sede s : sedes.values()) {
-			if (s.devolverDireccion().equals(direccion)) {
+			if (s.mismaDireccion(direccion)) {
 				return true; 
 			}
 		}
 		return false;
 	}
+	
+	private void agregarSede(String nombre, Sede s) {
+		sedes.put(nombre, s);
+	}
+	
+	
 }

@@ -7,7 +7,6 @@ public abstract class Sector {
 	
 	
 	public Sector(String sector, int capacidad) {
-		super();
 		this.sector = sector;
 		this.capacidad = capacidad;
 	}
