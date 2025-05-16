@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Ticketek implements ITicketek{
-
 	private HashMap<String,Usuario> usuarios;
 	private HashMap<String,Sede> sedes;
 	private HashMap<String,Espetaculo> espectaculos;
+	private HashMap<String,Entrada> entradas;
 
 	@Override
 	public void registrarSede(String nombre, String direccion, int capacidadMaxima) {
-		// TODO Auto-generated method stub
+		
+		Sede s= new Estadio(nombre,direccion,capacidadMaxima);
 		
 	}
 
