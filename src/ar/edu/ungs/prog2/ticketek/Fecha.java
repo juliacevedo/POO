@@ -10,7 +10,7 @@ public class Fecha {
 	
 	//CONSTRUCTOR
 	public Fecha(String fecha) {
-		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 	     this.fecha = LocalDate.parse(fecha, formatter);
 	}
 	
