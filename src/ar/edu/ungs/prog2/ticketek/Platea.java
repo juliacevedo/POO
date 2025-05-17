@@ -31,4 +31,11 @@ public class Platea extends Sector {
 		return false;
 	}
 
+
+	
+	@Override
+	protected String obtenerSector() {
+		return sector;
+	}
+
 }

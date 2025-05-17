@@ -11,5 +11,10 @@ public abstract class Sector {
 		this.capacidad = capacidad;
 	}
 	
+	protected int obtenerCapacidadMax() {
+		return this.capacidad;
+	}
+	protected abstract String obtenerSector();
+	
 	
 }

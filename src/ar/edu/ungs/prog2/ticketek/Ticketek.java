@@ -6,16 +6,19 @@ import java.util.List;
 public class Ticketek implements ITicketek{
 	private HashMap<String,Usuario> usuarios;
 	private HashMap<String,Sede> sedes;
-	private HashMap<String,Espetaculo> espectaculos;
+	private HashMap<String,Espectaculo> espectaculos;
 	private HashMap<String,Entrada> ventas;
 
 	
 	public Ticketek() {
+
         usuarios= new HashMap<>();
         sedes = new HashMap<>();
         espectaculos = new HashMap<>();
         ventas = new HashMap<>();
     }
+	
+	
 //____________________________________INTERFAZ PUBLICA_________________________________________
 	
 	@Override
@@ -64,29 +67,41 @@ public class Ticketek implements ITicketek{
 		agregarSede(nombre,s);
 	}
 
-	
-	
-	
-	
-	
+	//FUNCION DE MARTIN. 
 	@Override
 	public void registrarUsuario(String email, String nombre, String apellido, String contrasenia) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
+	}	
+		@Override
 	public void registrarEspectaculo(String nombre) {
-		// TODO Auto-generated method stub
-		
+		if (espectaculos.containsKey(nombre)){
+			throw new RuntimeException("El espectaculo ya se encuentra registrado. ");
+		}
+		Espectaculo e= new Espectaculo(nombre);
+		espectaculos.put(nombre, e);
 	}
 
 	@Override
 	public void agregarFuncion(String nombreEspectaculo, String fecha, String sede, double precioBase) {
-		// TODO Auto-generated method stub
+		if (!espectaculos.containsKey(nombreEspectaculo)) {
+			throw new RuntimeException("El espectaculo no esta registrado");
+		}
+		if (!sedes.containsKey(sede)) {
+			throw new RuntimeException("La sede no es valida");
+		}
+		if (espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
+			throw new RuntimeException("La fecha esta ocupada"); 
+		}
+		
 		
 	}
 
+	
+	
+	
+	
+	//_____________________FALTAN HACER_____________________
+	
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			int cantidadEntradas) {

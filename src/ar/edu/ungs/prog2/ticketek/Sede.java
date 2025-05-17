@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Sede {
@@ -27,15 +28,11 @@ public abstract class Sede {
 		return direccion;
 	}
 
-	public boolean mismaDireccion(String direccion) {
+	protected boolean mismaDireccion(String direccion) {
 		return this.direccion.equals(direccion); 
 	}
-	protected void crearPlateas(int asientosPorFila, String [] sectores, int []capacidad,int [] porcentajes) {
-		this.sectores= new Sector[4];
-		for (int i=0; i<sectores.length; i++) {
-			this.sectores[i]= new Platea(sectores[i], capacidad[i],porcentajes[i],asientosPorFila);
-		}
-	}
+	protected abstract void crearLugares(ArrayList<Tupla<String, Integer>> lugaresDisponibles);
+		
 	
 	
 	

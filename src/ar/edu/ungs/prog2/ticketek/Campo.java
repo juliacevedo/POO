@@ -10,6 +10,9 @@ public class Campo extends Sector{
 	}
 	
 	
-	
+	@Override
+	protected String obtenerSector() {
+		return sector;
+	}
 
 }
