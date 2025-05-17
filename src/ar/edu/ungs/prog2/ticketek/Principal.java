@@ -81,6 +81,7 @@ public class Principal {
 	        asientos 
         );
         System.out.println("\nEntradas Miguel Conejito Alejandro para El Rey Leon:");
+
         for (IEntrada e: entradasConejo)
         	System.out.println(" - " + e);
         

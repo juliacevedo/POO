@@ -11,17 +11,22 @@ public class Funcion {
 	
 	
 	
-	public Funcion(double precioBase, Fecha fecha, Sede sede, ArrayList<Tupla<String, Integer>> entradas) {
+	public Funcion(String fecha, Sede sede,double precioBase) {
 		if (precioBase<=0) {
 			throw new RuntimeException("El precio debe ser mayor a 0");
 		}
 		this.precioBase = precioBase;
-		this.fecha = fecha;
+		this.fecha = new Fecha(fecha);
 		this.sede = sede;
-		sede.crearLugares(this.entradas);
+		this.entradas=new ArrayList<>();
+		sede.crearLugares(entradas);
 		
 	}
 	
+	protected Fecha obtenerFecha() {
+		return fecha;
+	}
+
 
 }
 	

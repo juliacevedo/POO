@@ -92,6 +92,8 @@ public class Ticketek implements ITicketek{
 		if (espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
 			throw new RuntimeException("La fecha esta ocupada"); 
 		}
+		Funcion f= new Funcion(fecha,sedes.get(sede),precioBase);
+		espectaculos.get(nombreEspectaculo).agregarFuncion(f);
 		
 		
 	}
@@ -100,7 +102,7 @@ public class Ticketek implements ITicketek{
 	
 	
 	
-	//_____________________FALTAN HACER_____________________
+	//______________________________________FALTAN HACER___________________________________________
 	
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,

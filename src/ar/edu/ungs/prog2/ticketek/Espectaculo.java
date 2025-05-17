@@ -16,9 +16,13 @@ public class Espectaculo {
 		this.funciones = new HashMap<>();
 	}
 	
-	boolean fechaOcupada(String f) {
+	protected boolean fechaOcupada(String f) {
 		Fecha otra= new Fecha(f);
 		return funciones.containsKey(otra);
+	}
+	
+	protected void agregarFuncion(Funcion f) {
+		funciones.put(f.obtenerFecha(), f);
 	}
 	
 	

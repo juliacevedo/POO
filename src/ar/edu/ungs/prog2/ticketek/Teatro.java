@@ -19,10 +19,6 @@ public class Teatro extends Sede{
 
 	
 	
-	protected void creeAsientos(ArrayList<Tupla<String, Integer>> entradas) {
-		
-		
-	}
 
 	@Override
 	protected void crearLugares(ArrayList<Tupla<String, Integer>> lugares) {
