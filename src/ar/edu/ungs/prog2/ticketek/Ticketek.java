@@ -67,10 +67,13 @@ public class Ticketek implements ITicketek{
 		agregarSede(nombre,s);
 	}
 
-	//FUNCION DE MARTIN. 
 	@Override
 	public void registrarUsuario(String email, String nombre, String apellido, String contrasenia) {
-		
+		if (usuarios.containsKey(email)) {
+			throw new RuntimeException("El usuario ya esta registrado");
+		}
+		Usuario u= new Usuario(email,nombre,apellido,contrasenia);
+		usuarios.put(email, u);
 	}	
 		@Override
 	public void registrarEspectaculo(String nombre) {
