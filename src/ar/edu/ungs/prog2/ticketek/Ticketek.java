@@ -115,7 +115,13 @@ public class Ticketek implements ITicketek {
 		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
 			throw new RuntimeException("Contraseña Invalida");
 		}
-		//espectaculos.get(nombreEspectaculo).
+		if(!espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
+			throw new RuntimeException("El espectaculo no esta disponible en esa fecha");
+		}
+		if(espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
+			throw new RuntimeException("La sede ingresada es numerada.");
+		}
+		espectaculos.get(nombreEspectaculo).venderEntrada(cantidad,fecha,email);
 		
 		
 	}

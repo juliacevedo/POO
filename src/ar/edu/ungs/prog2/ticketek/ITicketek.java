@@ -104,9 +104,9 @@ public interface ITicketek {
      *  
      * Se debe lanzar una excepcion si:
      *  - Si la sede de la funcion está numerada
-     *  - si el usuario no está registrado OK
-     *  - si el espectaculo no está registrado OK
-     *  - si la contraseña no es valida OK
+     *  - si el usuario no está registrado 
+     *  - si el espectaculo no está registrado 
+     *  - si la contraseña no es valida 
      *  - etc...
      * 
      * @param nombreEspectaculo

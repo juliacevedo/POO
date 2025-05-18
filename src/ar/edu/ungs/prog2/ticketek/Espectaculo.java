@@ -24,6 +24,13 @@ public class Espectaculo {
 	protected void agregarFuncion(Funcion f) {
 		funciones.put(f.obtenerFecha(), f);
 	}
+	protected boolean sedeNumerada(String fecha) {
+		Fecha f= new Fecha(fecha);
+		return funciones.get(f).devolverSede().sedeNumerada();
+	}
+	protected void venderEntrada(int cant, String fecha, String email) {
+		return funciones.get(fecha).
+	}
 	
 	
 
