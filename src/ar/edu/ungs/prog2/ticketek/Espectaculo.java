@@ -17,7 +17,7 @@ public class Espectaculo {
 	}
 	
 	protected boolean fechaOcupada(String f) {
-		Fecha otra= new Fecha(f);
+		Fecha otra= new Fecha(f); // HAY QUE HACER UNA COMPARACION ENTRE FECHAS CON UN METODO NUEVO EQUALS O ASI YA ESTA BIEN
 		return funciones.containsKey(otra);
 	}
 	
@@ -26,6 +26,6 @@ public class Espectaculo {
 	}
 	
 	
-	
+
 
 }

@@ -19,7 +19,7 @@ public class Usuario {
 		if (!emailValido(email)) {
 			throw new RuntimeException("Email invalido, debe ser ej: usuario@aaaa.com");
 		}
-		if (contraseniaValida(contrasenia)) {
+		if (contraseniaNuevaValida(contrasenia)) {
 			throw new RuntimeException("La contraseña debe tener 8 digitos como minimo y contener al menos un numero y una letra mayuscula");
 		}
 
@@ -47,7 +47,7 @@ public class Usuario {
 	    return arroba == 1 && tienePuntoDespuesDeArroba;
 	}
 
-	private boolean contraseniaValida(String s) {
+	private boolean contraseniaNuevaValida(String s) {
 		boolean tieneLetra = false;
 		boolean tieneNumero = false;
 		boolean tieneMayuscula = false;
@@ -81,5 +81,14 @@ public class Usuario {
 	        }
 	    }
 	    return true;
+	}
+
+	
+	protected boolean contraseniaValida(String s) {
+		return s.equals(obtenerContrasenia());
+	}
+	
+	private String obtenerContrasenia() {
+		return contrasenia;
 	}
 }

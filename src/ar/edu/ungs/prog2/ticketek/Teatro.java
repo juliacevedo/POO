@@ -28,6 +28,11 @@ public class Teatro extends Sede{
 			}
 		}
 	}
+
+	@Override
+	protected boolean sedeNumerada() {
+		return true;
+	}
 	
 
 }

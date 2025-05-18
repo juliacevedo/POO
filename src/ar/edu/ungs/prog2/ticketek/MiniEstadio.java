@@ -30,6 +30,11 @@ public class MiniEstadio extends Sede {
 			}
 		}
 	}
+
+	@Override
+	protected boolean sedeNumerada() {
+		return true;
+	}
 	
 	
 

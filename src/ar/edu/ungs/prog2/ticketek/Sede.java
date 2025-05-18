@@ -33,8 +33,8 @@ public abstract class Sede {
 	}
 	protected abstract void crearLugares(ArrayList<Tupla<String, Integer>> lugaresDisponibles);
 		
-	
-	
+	// POLIMORFISMO y SOBREESCRITURA PARA DECIR SI ES O NO NUMERADA LA SEDE
+	protected abstract boolean sedeNumerada();
 	
 	
 	

@@ -26,6 +26,12 @@ public class Estadio extends Sede {
 	private Sector obtenerSector() {
 		return super.sectores[0];
 	}
+
+
+	@Override
+	protected boolean sedeNumerada() {
+		return false;
+	}
 		
 		
 		
