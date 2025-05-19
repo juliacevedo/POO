@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Usuario {
@@ -90,5 +91,14 @@ public class Usuario {
 	
 	private String obtenerContrasenia() {
 		return contrasenia;
+	}
+
+	public void agregarEntradas(String nombreEspectaculo,int codEspectaculo, String fecha, ArrayList<Tupla<String, Integer>> lugares) {
+		
+		for(int i=0; i<lugares.size();i++) {
+			IEntrada e =new Entrada(this.email,codEspectaculo,nombreEspectaculo, new Fecha(fecha));
+			
+		}
+		
 	}
 }

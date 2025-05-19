@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class Ticketek implements ITicketek {
 	// HACER___________________________________________
 
 	@Override
-	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,int cantidadEntradas) {
+	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,int cantidad) {
 		if (!espectaculos.containsKey(nombreEspectaculo)){
 			throw new RuntimeException("El espectaculo no esta registrado.");
 		}
@@ -121,9 +122,10 @@ public class Ticketek implements ITicketek {
 		if(espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
 			throw new RuntimeException("La sede ingresada es numerada.");
 		}
-		espectaculos.get(nombreEspectaculo).venderEntrada(cantidad,fecha,email);
 		
+		ArrayList<Tupla<String,Integer>> lugares= espectaculos.get(nombreEspectaculo).reservarLugares(cantidad,fecha);
 		
+		usuarios.get(email).agregarEntradas(nombreEspectaculo,espectaculos.get(nombreEspectaculo).obtenerCodigo(), fecha,lugares);
 	}
 
 	@Override

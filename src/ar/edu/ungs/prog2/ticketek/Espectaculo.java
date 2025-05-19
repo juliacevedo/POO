@@ -1,6 +1,8 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Espectaculo {
 	private int codigo;
@@ -28,10 +30,18 @@ public class Espectaculo {
 		Fecha f= new Fecha(fecha);
 		return funciones.get(f).devolverSede().sedeNumerada();
 	}
-	protected void venderEntrada(int cant, String fecha, String email) {
-		return funciones.get(fecha).
+//	protected List<IEntrada> venderEntrada(int cant, String fecha, String email) {
+//		return funciones.get(fecha).vender(cant,email,this.codigo, this.nombre);
+//	}
+//	
+
+	public ArrayList<Tupla<String,Integer>> reservarLugares(int cantidad, String fecha) {
+		return funciones.get(fecha).reservar(cantidad);
 	}
-	
+
+	public int obtenerCodigo() {
+		return codigo;
+	}
 	
 
 
