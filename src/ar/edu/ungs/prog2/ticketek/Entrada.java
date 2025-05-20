@@ -24,9 +24,8 @@ public class Entrada implements IEntrada {
 	}
 	
 	
-//	private void agregarUbicacion(ArrayList<String, Tupla<Integer>) {
 		
-	}
+	
 	
 	@Override
 	public double precio() {

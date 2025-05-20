@@ -2,6 +2,7 @@ package ar.edu.ungs.prog2.ticketek;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class Sede {
 	protected String nombre;
@@ -31,7 +32,7 @@ public abstract class Sede {
 	protected boolean mismaDireccion(String direccion) {
 		return this.direccion.equals(direccion); 
 	}
-	protected abstract void crearLugares(ArrayList<Tupla<String, Integer>> lugaresDisponibles);
+	protected abstract void  crearLugares(HashMap<String,ArrayList<Tupla<Integer, Integer>>> lugaresDisponibles);
 		
 	// POLIMORFISMO y SOBREESCRITURA PARA DECIR SI ES O NO NUMERADA LA SEDE
 	protected abstract boolean sedeNumerada();

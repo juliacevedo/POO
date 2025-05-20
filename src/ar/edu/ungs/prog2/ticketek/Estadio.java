@@ -1,6 +1,7 @@
 package ar.edu.ungs.prog2.ticketek;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Estadio extends Sede {
 	private double precioUnico;
@@ -15,12 +16,17 @@ public class Estadio extends Sede {
 
 
 	@Override
-	protected void crearLugares(ArrayList<Tupla<String, Integer>> lugaresDisponibles) {
-			Sector s= obtenerSector();
-			for(int i=0; i<s.obtenerCapacidadMax(); i++) {
-					lugaresDisponibles.add(new Tupla<>(s.obtenerSector(), null)); // Si es campo asiento null
-				}
+	protected void crearLugares(HashMap<String,ArrayList<Tupla<Integer, Integer>>> lugaresDisponibles) {
+		
+		for(int entrada = 1; entrada<super.sectores[0].obtenerCapacidadMax(); entrada++) {
+			Campo c = (Campo)super.sectores[0];
+			if (!lugaresDisponibles.containsKey(c.obtenerSector())) {
+			    lugaresDisponibles.put(c.obtenerSector(), new ArrayList<>());
 			}
+			lugaresDisponibles.get(c.obtenerSector()).add(new Tupla<>(0, entrada));
+		}
+		
+	}
 
 
 	private Sector obtenerSector() {

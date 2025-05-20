@@ -30,6 +30,10 @@ public class Platea extends Sector {
 		}
 		return false;
 	}
+	
+	public int obtenerAsientosPorFila() {
+		return this.asientosPorFila;
+	}
 
 
 	

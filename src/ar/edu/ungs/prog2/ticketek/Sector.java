@@ -15,6 +15,9 @@ public abstract class Sector {
 		return this.capacidad;
 	}
 	protected abstract String obtenerSector();
+
+	
+
 	
 	
 }
