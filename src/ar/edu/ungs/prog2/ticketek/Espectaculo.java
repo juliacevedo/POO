@@ -15,6 +15,7 @@ public class Espectaculo {
 		this.codigo = acumulador++;
 		this.nombre = nombre;
 		this.funciones = new HashMap<>();
+	
 	}
 	
 	protected void crearEntradasDeFunciones() {

@@ -8,18 +8,28 @@ public class Entrada implements IEntrada {
 	private Integer codEspectaculo;
 	private String nombreDeEspectaculo;
 	private Fecha fecha;
-	private String ubicacion;
+	private String ubicacion; //Sector
+	private Tupla<Integer,Integer> asiento;
 	private static int acumulador=100;
 	boolean vendida;
 	
 	
-	
+	//SOBRECARGA por que tiene dos constructores distintos.
 	public Entrada(int codEspectaculo, String nombreDeEspectaculo,Fecha fecha) {
 		this.codEntrada = acumulador++;
 		this.codEspectaculo = codEspectaculo;
 		this.nombreDeEspectaculo = nombreDeEspectaculo;
 		this.fecha = fecha;
-	//	this.ubicacion = new HashMap<>(); 
+		this.ubicacion = "CAMPO"; 
+		this.asiento=null;
+		this.vendida=false;
+	}
+	public Entrada(int codEspectaculo, String nombreDeEspectaculo,Fecha fecha, String sector, Tupla<Integer,Integer> asiento) {
+		this.codEntrada = acumulador++;
+		this.codEspectaculo = codEspectaculo;
+		this.nombreDeEspectaculo = nombreDeEspectaculo;
+		this.fecha = fecha;
+	    this.ubicacion = sector;
 		this.vendida=false;
 	}
 	

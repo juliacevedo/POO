@@ -39,5 +39,8 @@ public abstract class Sede {
 	protected abstract boolean sedeNumerada();
 	
 	
+	public Sector[] obtenerSectores() {
+		return this.sectores;
+	}
 	
 }

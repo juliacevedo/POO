@@ -124,10 +124,9 @@ public class Ticketek implements ITicketek {
 		if (espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
 			throw new RuntimeException("La sede ingresada es numerada.");
 		}
-		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha))
-				.venderEntrada(email, cantidadEntradas);
+		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, cantidadEntradas);
 		for (IEntrada e : vendidas) {
-			int codigo = ((Entrada) e).ObtenerCodEntrada();
+			Integer codigo = ((Entrada) e).ObtenerCodEntrada();
 		    usuarios.get(email).agregarEntradas(codigo);			
 		}
 		return vendidas;
