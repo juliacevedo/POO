@@ -8,7 +8,7 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private String contrasenia;
-	private HashMap<String, Entrada> entradas;
+	private ArrayList<Integer> entradasCompradas;
 
 	public Usuario(String email, String nombre, String apellido, String contrasenia) {
 		if (!nombreValido(nombre)) {
@@ -21,31 +21,32 @@ public class Usuario {
 			throw new RuntimeException("Email invalido, debe ser ej: usuario@aaaa.com");
 		}
 		if (contraseniaNuevaValida(contrasenia)) {
-			throw new RuntimeException("La contraseña debe tener 8 digitos como minimo y contener al menos un numero y una letra mayuscula");
+			throw new RuntimeException(
+					"La contraseña debe tener 8 digitos como minimo y contener al menos un numero y una letra mayuscula");
 		}
 
 		this.nombre = nombre;
 		this.email = email;
 		this.contrasenia = contrasenia;
-		this.entradas= new HashMap<>();
+		this.entradasCompradas = new ArrayList<>();
 	}
 
-	//Validacion de parametros
+	// Validacion de parametros
 
 	private boolean emailValido(String s) {
-	    int arroba = 0;
-	    boolean tienePuntoDespuesDeArroba = false;
+		int arroba = 0;
+		boolean tienePuntoDespuesDeArroba = false;
 
-	    for (int i = 0; i < s.length(); i++) {
-	        if (s.charAt(i) == '@') {
-	            arroba++;
-	        }
-	        if (arroba == 1 && s.charAt(i) == '.') {
-	            tienePuntoDespuesDeArroba = true;
-	        }
-	    }
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '@') {
+				arroba++;
+			}
+			if (arroba == 1 && s.charAt(i) == '.') {
+				tienePuntoDespuesDeArroba = true;
+			}
+		}
 
-	    return arroba == 1 && tienePuntoDespuesDeArroba;
+		return arroba == 1 && tienePuntoDespuesDeArroba;
 	}
 
 	private boolean contraseniaNuevaValida(String s) {
@@ -71,34 +72,29 @@ public class Usuario {
 	}
 
 	private boolean nombreValido(String s) {
-	    if (s.length() < 3) {
-	    	return false;
-	    }
+		if (s.length() < 3) {
+			return false;
+		}
 
-	    for (int i = 0; i < s.length(); i++) {
-	        char c = s.charAt(i);
-	        if (!Character.isLetter(c)) {
-	            return false; // No se permite ni dígito ni símbolo
-	        }
-	    }
-	    return true;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (!Character.isLetter(c)) {
+				return false; // No se permite ni dígito ni símbolo
+			}
+		}
+		return true;
 	}
 
-	
 	protected boolean contraseniaValida(String s) {
 		return s.equals(obtenerContrasenia());
 	}
-	
+
 	private String obtenerContrasenia() {
 		return contrasenia;
 	}
 
-	public void agregarEntradas(String nombreEspectaculo,int codEspectaculo, String fecha, ArrayList<Tupla<String, Integer>> lugares) {
-		
-		for(int i=0; i<lugares.size();i++) {
-			IEntrada e =new Entrada(this.email,codEspectaculo,nombreEspectaculo, new Fecha(fecha));
-			
-		}
-		
+	public void agregarEntradas(int codEntrada) {
+		entradasCompradas.add(codEntrada);
 	}
+
 }

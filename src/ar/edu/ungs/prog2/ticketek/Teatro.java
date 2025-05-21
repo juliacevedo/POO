@@ -18,35 +18,15 @@ public class Teatro extends Sede {
 		}
 	}
 
-	@Override
-	protected void crearLugares(HashMap<String, ArrayList<Tupla<Integer, Integer>>> lugaresDisponibles){
-		for (Sector s : super.sectores) {
-			if (s instanceof Platea) {
-				Platea p = (Platea) s;
-				int fila = 1;
-				int contador = p.obtenerAsientosPorFila();
-				for (int asiento = 1; asiento <= p.obtenerCapacidadMax(); asiento++) {
-					if (contador == 0) {
-						contador = p.obtenerAsientosPorFila();
-						fila++;
-					} else {
-						// Si no existe la lista para el sector, crearla
-						if (!lugaresDisponibles.containsKey(p.obtenerSector())) {
-						    lugaresDisponibles.put(p.obtenerSector(), new ArrayList<>());
-						}
 
-						// Agregar la tupla a la lista del sector
-						lugaresDisponibles.get(p.obtenerSector()).add(new Tupla<>(fila, asiento));
-
-					}
-				}
-			}
-		}
-	}
+	
 
 	@Override
 	protected boolean sedeNumerada() {
 		return true;
 	}
+
+
+	
 
 }

@@ -15,18 +15,7 @@ public class Estadio extends Sede {
 	}
 
 
-	@Override
-	protected void crearLugares(HashMap<String,ArrayList<Tupla<Integer, Integer>>> lugaresDisponibles) {
-		
-		for(int entrada = 1; entrada<super.sectores[0].obtenerCapacidadMax(); entrada++) {
-			Campo c = (Campo)super.sectores[0];
-			if (!lugaresDisponibles.containsKey(c.obtenerSector())) {
-			    lugaresDisponibles.put(c.obtenerSector(), new ArrayList<>());
-			}
-			lugaresDisponibles.get(c.obtenerSector()).add(new Tupla<>(0, entrada));
-		}
-		
-	}
+	
 
 
 	private Sector obtenerSector() {

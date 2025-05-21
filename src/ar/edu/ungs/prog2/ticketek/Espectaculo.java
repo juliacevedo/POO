@@ -7,27 +7,35 @@ import java.util.List;
 public class Espectaculo {
 	private int codigo;
 	private String nombre;
-	private HashMap<Fecha,Funcion> funciones;
-	private static int acumulador=100;
-	//TOTAL RECAUDADO: DOUBLE ??
-	
-	
+	private HashMap<Fecha, Funcion> funciones;
+	private static int acumulador = 100;
+	// TOTAL RECAUDADO: DOUBLE ??
+
 	public Espectaculo(String nombre) {
 		this.codigo = acumulador++;
 		this.nombre = nombre;
 		this.funciones = new HashMap<>();
 	}
 	
-	protected boolean fechaOcupada(String f) {
-		Fecha otra= new Fecha(f); // HAY QUE HACER UNA COMPARACION ENTRE FECHAS CON UN METODO NUEVO EQUALS O ASI YA ESTA BIEN
-		return funciones.containsKey(otra);
+	protected void crearEntradasDeFunciones() {
+		for(Funcion f : this.funciones.values()) {
+			f.crearEntradas(codigo,nombre);
+		}
 	}
 	
+
+	protected boolean fechaOcupada(String f) {
+		Fecha otra = new Fecha(f); // HAY QUE HACER UNA COMPARACION ENTRE FECHAS CON UN METODO NUEVO EQUALS O ASI
+									// YA ESTA BIEN
+		return funciones.containsKey(otra);
+	}
+
 	protected void agregarFuncion(Funcion f) {
 		funciones.put(f.obtenerFecha(), f);
 	}
+
 	protected boolean sedeNumerada(String fecha) {
-		Fecha f= new Fecha(fecha);
+		Fecha f = new Fecha(fecha);
 		return funciones.get(f).devolverSede().sedeNumerada();
 	}
 
@@ -35,7 +43,8 @@ public class Espectaculo {
 	public int obtenerCodigo() {
 		return codigo;
 	}
-	
-
+	protected Funcion obtenerFuncion(Fecha f) {
+		return funciones.get(f);
+	}
 
 }

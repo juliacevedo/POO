@@ -8,14 +8,14 @@ public class Ticketek implements ITicketek {
 	private HashMap<String, Usuario> usuarios;
 	private HashMap<String, Sede> sedes;
 	private HashMap<String, Espectaculo> espectaculos;
-	//private HashMap<String, Entrada> ventas;
+	// private HashMap<String, Entrada> ventas;
 
 	public Ticketek() {
 
 		usuarios = new HashMap<>();
 		sedes = new HashMap<>();
 		espectaculos = new HashMap<>();
-		//ventas = new HashMap<>();
+		// ventas = new HashMap<>();
 	}
 
 //____________________________________INTERFAZ PUBLICA_________________________________________
@@ -105,30 +105,33 @@ public class Ticketek implements ITicketek {
 	// ______________________________________FALTAN
 	// HACER___________________________________________
 
-//	@Override
-    public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia, int cantidadEntradas){
-    	return null;
-    }
-//		if (!espectaculos.containsKey(nombreEspectaculo)){
-//			throw new RuntimeException("El espectaculo no esta registrado.");
-//		}
-//		if (!usuarios.containsKey(email)) {
-//			throw new RuntimeException("El usuario no esta registrado");
-//		}
-//		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
-//			throw new RuntimeException("Contraseña Invalida");
-//		}
-//		if(!espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
-//			throw new RuntimeException("El espectaculo no esta disponible en esa fecha");
-//		}
-//		if(espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
-//			throw new RuntimeException("La sede ingresada es numerada.");
-//		}
-//		
-//		ArrayList<Tupla<String,Integer>> lugares= espectaculos.get(nombreEspectaculo).reservarLugares(cantidad,fecha);
-//		
-//		//return usuarios.get(email).agregarEntradas(nombreEspectaculo,espectaculos.get(nombreEspectaculo).obtenerCodigo(), fecha,lugares);
-//	}
+//	@Override // la funcion tiene uana sede que tiene un sector y la funcion crea las entradas. el usuario solo tiene cod de entradas.
+	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
+			int cantidadEntradas) {
+
+		if (!espectaculos.containsKey(nombreEspectaculo)) {
+			throw new RuntimeException("El espectaculo no esta registrado.");
+		}
+		if (!usuarios.containsKey(email)) {
+			throw new RuntimeException("El usuario no esta registrado");
+		}
+		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
+			throw new RuntimeException("Contraseña Invalida");
+		}
+		if (!espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
+			throw new RuntimeException("El espectaculo no esta disponible en esa fecha");
+		}
+		if (espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
+			throw new RuntimeException("La sede ingresada es numerada.");
+		}
+		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha))
+				.venderEntrada(email, cantidadEntradas);
+		for (IEntrada e : vendidas) {
+			int codigo = ((Entrada) e).ObtenerCodEntrada();
+		    usuarios.get(email).agregarEntradas(codigo);			
+		}
+		return vendidas;
+	}
 
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,

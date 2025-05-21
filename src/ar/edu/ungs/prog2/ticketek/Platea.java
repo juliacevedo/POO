@@ -35,7 +35,6 @@ public class Platea extends Sector {
 		return this.asientosPorFila;
 	}
 
-
 	
 	@Override
 	protected String obtenerSector() {

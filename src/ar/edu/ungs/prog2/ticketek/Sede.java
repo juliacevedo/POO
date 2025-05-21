@@ -28,15 +28,15 @@ public abstract class Sede {
 	protected String devolverDireccion() {
 		return direccion;
 	}
-
+	protected int devolverCapacidadMax() {
+		return this.capacidadMaxima;
+	}
 	protected boolean mismaDireccion(String direccion) {
 		return this.direccion.equals(direccion); 
 	}
-	protected abstract void  crearLugares(HashMap<String,ArrayList<Tupla<Integer, Integer>>> lugaresDisponibles);
 		
 	// POLIMORFISMO y SOBREESCRITURA PARA DECIR SI ES O NO NUMERADA LA SEDE
 	protected abstract boolean sedeNumerada();
-	
 	
 	
 	
