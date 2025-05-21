@@ -32,14 +32,14 @@ public class Funcion {
 		return sede;
 	}
 
-//	public void crearEntradas(Integer codigo, String nombre) {
-//		if (this.sede instanceof Estadio) {
-//			for (int entrada = 1; entrada <= this.sede.devolverCapacidadMax(); entrada++) {
-//				Entrada e = new Entrada(codigo, nombre, fecha);
-//	            entradas.put(e.ObtenerCodEntrada(), e); 
-//			}
-//		}
-//	}
+	public void crearEntradas(Integer codigo, String nombre) {
+		if (this.sede instanceof Estadio) {
+			for (int entrada = 1; entrada <= this.sede.devolverCapacidadMax(); entrada++) {
+				Entrada e = new Entrada(codigo, nombre, fecha);
+	            entradas.put(e.ObtenerCodEntrada(), e); 
+			}
+		}
+	}
 
 	public List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
 		int cantidad = 0;
@@ -60,5 +60,6 @@ public class Funcion {
 		}
 		return lista;
 	}
+
 
 }
