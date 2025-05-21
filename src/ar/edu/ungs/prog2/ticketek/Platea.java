@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Platea extends Sector {
 	private int porcentajeAdicional;
-	private int asientosPorFila;
+	private int asientosPorFila; 
 	private String[] sectores_validos = { "Platea VIP", "Platea Común", "Platea Baja", "Platea Alta" };
 	private ArrayList<Tupla<Integer, Integer>> asientos;
 
@@ -48,6 +48,12 @@ public class Platea extends Sector {
 	@Override
 	protected String obtenerSector() {
 		return sector;
+	}
+
+	
+	public ArrayList<Tupla<Integer, Integer>> obtenerAsientos() {
+		
+		return asientos;
 	}
 
 }

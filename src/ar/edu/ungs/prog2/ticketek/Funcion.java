@@ -36,21 +36,29 @@ public class Funcion {
 		if (this.sede instanceof Estadio) {
 			for (int entrada = 1; entrada <= this.sede.devolverCapacidadMax(); entrada++) {
 				Entrada e = new Entrada(codigo, nombre, fecha);
-	            entradas.put(e.ObtenerCodEntrada(), e); 
+				entradas.put(e.ObtenerCodEntrada(), e);
+			}
+		} else {
+			for (Sector s : this.sede.obtenerSectores()) {
+				Platea p = (Platea) s;
+				for (Tupla<Integer, Integer> asiento : p.obtenerAsientos()) {
+					Entrada e = new Entrada(codigo, nombre, fecha, p.obtenerSector(), asiento);
+					entradas.put(e.ObtenerCodEntrada(), e);
+				}
 			}
 		}
+
 	}
 
 	public List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
-		int cantidad = 0;
 		List<IEntrada> lista = new ArrayList<>();
 		if (ventas > cantidadEntradas) {
 			throw new RuntimeException("No hay suficientes entradas disponibles");
 		}
 		if (this.sede instanceof Estadio) {
 			for (Entrada e : entradas.values()) {
-				if (cantidad > 0 && !e.estaVendida()) {
-					cantidad--;
+				if (cantidadEntradas > 0 && !e.estaVendida()) {
+					cantidadEntradas--;
 					e.estaVendida();
 					e.emailComprador(email);
 					lista.add(e);
@@ -60,6 +68,5 @@ public class Funcion {
 		}
 		return lista;
 	}
-
 
 }
