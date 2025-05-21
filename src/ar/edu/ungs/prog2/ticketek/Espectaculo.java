@@ -5,24 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Espectaculo {
-	private int codigo;
 	private String nombre;
+	private Integer codigo;
 	private HashMap<Fecha, Funcion> funciones;
 	private static int acumulador = 100;
 	// TOTAL RECAUDADO: DOUBLE ??
 
 	public Espectaculo(String nombre) {
-		this.codigo = acumulador++;
 		this.nombre = nombre;
+		this.codigo = acumulador++;
 		this.funciones = new HashMap<>();
 	
 	}
 	
-	protected void crearEntradasDeFunciones() {
-		for(Funcion f : this.funciones.values()) {
-			f.crearEntradas(codigo,nombre);
-		}
-	}
+	
 	
 
 	protected boolean fechaOcupada(String f) {
@@ -33,6 +29,7 @@ public class Espectaculo {
 
 	protected void agregarFuncion(Funcion f) {
 		funciones.put(f.obtenerFecha(), f);
+		f.crearEntradas(codigo,nombre);
 	}
 
 	protected boolean sedeNumerada(String fecha) {

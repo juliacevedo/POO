@@ -21,13 +21,14 @@ public class Platea extends Sector {
 		}
 		this.asientosPorFila = asientosPorFila;
 		this.porcentajeAdicional = porcentajeAdicional;
+		this.asientos = new ArrayList<>(); 
 		generarAsientos();
 	}
 
 	private void generarAsientos() {
 		for (Integer fila = 1; fila <= capacidad / this.asientosPorFila; fila++) {
-			for (Integer asiento = 1; asiento <= asientosPorFila; asiento++) { // 1 1 1 1 1 1
-				asientos.add(new Tupla<>(fila, asiento)); // 1 1 1 1 1 1
+			for (Integer asiento = 1; asiento <= asientosPorFila; asiento++) { 
+				asientos.add(new Tupla<>(fila, asiento)); 
 			}
 		}
 	}

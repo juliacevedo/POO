@@ -93,7 +93,7 @@ public class Usuario {
 		return contrasenia;
 	}
 
-	public void agregarEntradas(int codEntrada) {
+	public void agregarEntradas(Integer codEntrada) {
 		entradasCompradas.add(codEntrada);
 	}
 

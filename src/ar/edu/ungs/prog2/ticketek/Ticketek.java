@@ -65,7 +65,7 @@ public class Ticketek implements ITicketek {
 
 		Sede s = new MiniEstadio(nombre, direccion, capacidadMaxima, asientosPorFila, cantidadPuestos,
 				precioConsumicion, sectores, capacidad, porcentajeAdicional);
-		agregarSede(nombre, s);
+		sedes.put(nombre, s);
 	}
 
 	@Override
@@ -102,10 +102,9 @@ public class Ticketek implements ITicketek {
 
 	}
 
-	// ______________________________________FALTAN
-	// HACER___________________________________________
+	// ______________________________________FALTAN HACER___________________________________________
 
-//	@Override // la funcion tiene uana sede que tiene un sector y la funcion crea las entradas. el usuario solo tiene cod de entradas.
+//	@Override 
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			int cantidadEntradas) {
 
@@ -122,7 +121,7 @@ public class Ticketek implements ITicketek {
 			throw new RuntimeException("El espectaculo no esta disponible en esa fecha");
 		}
 		if (espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
-			throw new RuntimeException("La sede ingresada es numerada.");
+			throw new RuntimeException("La fecha indicada es para una sede numerada.");
 		}
 		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, cantidadEntradas);
 		for (IEntrada e : vendidas) {

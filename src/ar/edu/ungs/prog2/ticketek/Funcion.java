@@ -19,9 +19,8 @@ public class Funcion {
 		this.precioBase = precioBase;
 		this.fecha = new Fecha(fecha);
 		this.sede = sede;
-		this.entradas = new HashMap<>();
 		this.ventas = 0;
-
+		this.entradas = new HashMap<>();
 	}
 
 	protected Fecha obtenerFecha() {
@@ -35,15 +34,17 @@ public class Funcion {
 	public void crearEntradas(Integer codigo, String nombre) {
 		if (this.sede instanceof Estadio) {
 			for (int entrada = 1; entrada <= this.sede.devolverCapacidadMax(); entrada++) {
-				Entrada e = new Entrada(codigo, nombre, fecha);
+				Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha);
 				entradas.put(e.ObtenerCodEntrada(), e);
 			}
 		} else {
 			for (Sector s : this.sede.obtenerSectores()) {
-				Platea p = (Platea) s;
-				for (Tupla<Integer, Integer> asiento : p.obtenerAsientos()) {
-					Entrada e = new Entrada(codigo, nombre, fecha, p.obtenerSector(), asiento);
-					entradas.put(e.ObtenerCodEntrada(), e);
+				if (s instanceof Platea) {
+					Platea p = (Platea) s;
+					for (Tupla<Integer, Integer> asiento : p.obtenerAsientos()) {
+						Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha, p.obtenerSector(),asiento);
+						entradas.put(e.ObtenerCodEntrada(), e);
+					}
 				}
 			}
 		}

@@ -42,5 +42,8 @@ public abstract class Sede {
 	public Sector[] obtenerSectores() {
 		return this.sectores;
 	}
+	public String obtenerNombre() {
+		return this.nombre;
+	}
 	
 }
