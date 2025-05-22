@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Platea extends Sector {
 	private int porcentajeAdicional;
-	private int asientosPorFila; 
+	private int asientosPorFila;
 	private String[] sectores_validos = { "Platea VIP", "Platea Común", "Platea Baja", "Platea Alta" };
 	private ArrayList<Tupla<Integer, Integer>> asientos;
 
@@ -21,16 +21,20 @@ public class Platea extends Sector {
 		}
 		this.asientosPorFila = asientosPorFila;
 		this.porcentajeAdicional = porcentajeAdicional;
-		this.asientos = new ArrayList<>(); 
+		this.asientos = new ArrayList<>();
 		generarAsientos();
 	}
 
 	private void generarAsientos() {
-		for (Integer fila = 1; fila <= capacidad / this.asientosPorFila; fila++) {
-			for (Integer asiento = 1; asiento <= asientosPorFila; asiento++) { 
-				asientos.add(new Tupla<>(fila, asiento)); 
-			}
+		Integer fila = 1;
+		int control = this.asientosPorFila;
+		for (Integer asiento = 1; asiento <= super.capacidad; asiento++) {
+			if (asiento > control) {
+				fila++;
+				control += this.asientosPorFila;			}
+			asientos.add(new Tupla<>(fila, asiento));
 		}
+
 	}
 
 	private boolean validaNombreDePlatea(String platea) {
@@ -51,9 +55,8 @@ public class Platea extends Sector {
 		return sector;
 	}
 
-	
 	public ArrayList<Tupla<Integer, Integer>> obtenerAsientos() {
-		
+
 		return asientos;
 	}
 

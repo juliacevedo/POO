@@ -136,7 +136,9 @@ public class Ticketek implements ITicketek {
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			String sector, int[] asientos) {
-		// TODO Auto-generated method stub
+		
+		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, sector,asientos);
+
 		return null;
 	}
 
