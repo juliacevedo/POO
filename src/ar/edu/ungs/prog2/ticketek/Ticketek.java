@@ -130,17 +130,33 @@ public class Ticketek implements ITicketek {
 	}
 	
 	
-	// ______________________________________FALTAN_HACER___________________________________________
-
-
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			String sector, int[] asientos) {
-		
+		if (!espectaculos.containsKey(nombreEspectaculo)) {
+			throw new RuntimeException("El espectaculo no esta registrado.");
+		}
+		if (!usuarios.containsKey(email)) {
+			throw new RuntimeException("El usuario no esta registrado");
+		}
+		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
+			throw new RuntimeException("Contraseña Invalida");
+		}
+		if (!espectaculos.get(nombreEspectaculo).fechaOcupada(fecha)) {
+			throw new RuntimeException("El espectaculo no esta disponible en esa fecha");
+		}
+		if (!espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
+			throw new RuntimeException("La fecha indicada no pertenece a una sede numerada");
+		}
 		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, sector,asientos);
-
-		return null;
+		
+		return vendidas;
 	}
+	
+	
+	// ______________________________________FALTAN_HACER___________________________________________
+
+
 
 	@Override
 	public String listarFunciones(String nombreEspectaculo) {

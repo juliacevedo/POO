@@ -22,6 +22,7 @@ public class Entrada implements IEntrada {
 		this.fecha = fecha.toString();
 		this.ubicacion = "CAMPO";
 		this.asiento = null;
+		this.emailDeComprador="";
 	}
 
 	public Entrada(String nombreDeSede, int codEspectaculo, String nombreDeEspectaculo, Fecha fecha, String sector,
@@ -40,9 +41,8 @@ public class Entrada implements IEntrada {
 	}
 
 	public boolean disponible() {
-		return this.emailDeComprador.equals("");
+	    return this.emailDeComprador == null || this.emailDeComprador.equals("");
 	}
-
 	@Override
 	public double precio() {
 		// TODO Auto-generated method stub
