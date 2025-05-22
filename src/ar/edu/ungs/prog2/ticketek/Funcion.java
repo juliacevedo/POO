@@ -52,7 +52,7 @@ public class Funcion {
 
 	}
 
-	public List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
+	protected List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
 		List<IEntrada> lista = new ArrayList<>();
 		if ((sede.devolverCapacidadMax() - ventas) < cantidadEntradas) {
 			throw new RuntimeException("No hay suficientes entradas disponibles");
@@ -74,7 +74,7 @@ public class Funcion {
 	protected List<IEntrada> venderEntrada(String email, String sector, int[] asientos) {
 		List<IEntrada> lista = new ArrayList<>();
 		if (entradasDelSector(sector).isEmpty() || !asientosDisponibles(asientos, sector)) {
-			throw new RuntimeException("Asiento no disponible");
+			throw new RuntimeException("Al menos un asiento de los indicados se encuentra ocupado");
 		}
 		for (int a : asientos) {
 			for (Entrada e : entradasDelSector(sector)) {

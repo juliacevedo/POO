@@ -129,7 +129,6 @@ public class Ticketek implements ITicketek {
 		return vendidas;
 	}
 	
-	
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			String sector, int[] asientos) {
@@ -149,7 +148,10 @@ public class Ticketek implements ITicketek {
 			throw new RuntimeException("La fecha indicada no pertenece a una sede numerada");
 		}
 		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, sector,asientos);
-		
+		for (IEntrada e : vendidas) {
+			Integer codigo = ((Entrada) e).ObtenerCodEntrada();
+			usuarios.get(email).agregarEntradas(codigo);
+		}
 		return vendidas;
 	}
 	
