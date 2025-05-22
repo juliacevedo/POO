@@ -25,6 +25,14 @@ public abstract class Sede {
 		this.capacidadMaxima = capacidadMaxima;
 		}
 	
+	protected Sector devolverSector(String s) {
+		for(Sector sec : sectores) {
+			if (sec.obtenerSector().equals(s)){
+				return sec;
+			}
+		}
+		throw new RuntimeException ("El sector no existe");
+	}
 	protected String devolverDireccion() {
 		return direccion;
 	}

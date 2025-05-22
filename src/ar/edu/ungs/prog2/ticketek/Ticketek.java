@@ -162,8 +162,10 @@ public class Ticketek implements ITicketek {
 
 	@Override
 	public String listarFunciones(String nombreEspectaculo) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!espectaculos.containsKey(nombreEspectaculo)) {
+			throw new RuntimeException("El espectaculo no se encuentra registrado.");
+		}
+		return espectaculos.get(nombreEspectaculo).listarFunciones();
 	}
 
 	@Override

@@ -43,6 +43,18 @@ public class Entrada implements IEntrada {
 	public boolean disponible() {
 	    return this.emailDeComprador == null || this.emailDeComprador.equals("");
 	}
+	
+	protected String obtenerSector() {
+		return this.ubicacion;
+	}
+
+	public int ObtenerCodEntrada() {
+		return this.codEntrada;
+	}
+	public Tupla<Integer,Integer> obtenerAsiento() {
+		return asiento;
+	}
+
 	@Override
 	public double precio() {
 		// TODO Auto-generated method stub
@@ -51,19 +63,16 @@ public class Entrada implements IEntrada {
 
 	@Override
 	public String ubicacion() {
+		if(asiento==null) {
+			return "CAMPO";
+		}
+		return this.ubicacion + " f:" + asiento.getFila() + " a:" + asiento.getAsiento();
+}
+		
+	
+	@Override
+	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	protected String obtenerUbicacion() {
-		return this.ubicacion;
-	}
-
-
-	public int ObtenerCodEntrada() {
-		return this.codEntrada;
-	}
-	public Tupla<Integer,Integer> obtenerAsiento() {
-		return asiento;
 	}
 }

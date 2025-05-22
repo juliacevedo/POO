@@ -28,7 +28,8 @@ public class Fecha {
 	
 	@Override
 	public String toString() {
-		return fecha + "";
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    return fecha.format(formatter);
 	}
 
 	// SOBREESCRIBIR METODO EQUALS PARA QUE PODAMOS COMPARAR LAS FUNCIONES EN LA

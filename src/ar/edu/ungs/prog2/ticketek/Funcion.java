@@ -9,7 +9,6 @@ public class Funcion {
 	private double precioBase;
 	private Fecha fecha;
 	private Sede sede;
-	private int ventas;
 	private HashMap<Integer, Entrada> entradas;
 
 	public Funcion(String fecha, Sede sede, double precioBase) {
@@ -19,7 +18,6 @@ public class Funcion {
 		this.precioBase = precioBase;
 		this.fecha = new Fecha(fecha);
 		this.sede = sede;
-		this.ventas = 0;
 		this.entradas = new HashMap<>();
 	}
 
@@ -54,7 +52,7 @@ public class Funcion {
 
 	protected List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
 		List<IEntrada> lista = new ArrayList<>();
-		if ((sede.devolverCapacidadMax() - ventas) < cantidadEntradas) {
+		if ((sede.devolverCapacidadMax() - sede.sectores[0].obtenerVentas()) < cantidadEntradas) {
 			throw new RuntimeException("No hay suficientes entradas disponibles");
 		}
 		if (this.sede instanceof Estadio) {
@@ -64,7 +62,7 @@ public class Funcion {
 
 					e.emailComprador(email);
 					lista.add(e);
-					this.ventas++;
+					sede.obtenerSectores()[0].aumentarVentas();
 				}
 			}
 		}
@@ -81,10 +79,12 @@ public class Funcion {
 				if (e.obtenerAsiento().getAsiento() == a) {
 					e.emailComprador(email);
 					lista.add(e);
-					this.ventas++;
+					this.sede.devolverSector(sector).aumentarVentas();
+					;
 				}
 			}
-		}return lista;
+		}
+		return lista;
 	}
 
 	private boolean asientosDisponibles(int[] asientos, String sector) {
@@ -102,10 +102,22 @@ public class Funcion {
 		ArrayList entradasDelSector = new ArrayList<>();
 
 		for (Entrada e : this.entradas.values()) {
-			if (e.obtenerUbicacion().equals(sector)) {
+			if (e.obtenerSector().equals(sector)) {
 				entradasDelSector.add(e);
 			}
 		}
 		return entradasDelSector;
 	}
+
+	@Override
+	public String toString() {
+		if (sede instanceof Estadio) {
+			return "(" + fecha.toString() + ") " + "" + sede.obtenerNombre() + "" + " - "
+					+ sede.sectores[0].obtenerVentas() + "" + "/" + sede.devolverCapacidadMax() + "";
+		}
+		return "(" + fecha.toString() + ") " + "" + sede.obtenerNombre() + "" + " - ";
+	}
+
+
+
 }

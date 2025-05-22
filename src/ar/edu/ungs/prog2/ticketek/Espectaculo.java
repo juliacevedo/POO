@@ -19,6 +19,18 @@ public class Espectaculo {
 	}
 	
 	
+	// ACA USAMOS STRING BUILDER PARA CONCATENAR TODAS LAS FUNCIONES DE FORMA MAS EFICIENTE YA QUE LOS STRING SON INMUTABLES 
+	
+	protected String listarFunciones() {
+	    StringBuilder sb = new StringBuilder();
+	    if(funciones.isEmpty()) {
+	    	throw new RuntimeException ("No hay funciones registradas para el espectaculo.");
+	    }
+		for (Funcion f : funciones.values()) {
+			sb.append(f.toString()).append("\n");
+		}
+		return sb.toString(); // Por que devuelve string no stringbuilder.
+	}
 	
 
 	protected boolean fechaOcupada(String f) {
