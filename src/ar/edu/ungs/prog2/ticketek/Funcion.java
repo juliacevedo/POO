@@ -42,7 +42,7 @@ public class Funcion {
 				if (s instanceof Platea) {
 					Platea p = (Platea) s;
 					for (Tupla<Integer, Integer> asiento : p.obtenerAsientos()) {
-						Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha, p.obtenerSector(),asiento);
+						Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha, s.obtenerSector(),asiento);
 						entradas.put(e.ObtenerCodEntrada(), e);
 					}
 				}
@@ -53,7 +53,7 @@ public class Funcion {
 
 	public List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
 		List<IEntrada> lista = new ArrayList<>();
-		if (ventas > cantidadEntradas) {
+		if ((sede.devolverCapacidadMax()-ventas) < cantidadEntradas) {
 			throw new RuntimeException("No hay suficientes entradas disponibles");
 		}
 		if (this.sede instanceof Estadio) {

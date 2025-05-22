@@ -102,12 +102,10 @@ public class Ticketek implements ITicketek {
 
 	}
 
-	// ______________________________________FALTAN HACER___________________________________________
-
-//	@Override 
+	@Override 
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
 			int cantidadEntradas) {
-
+		
 		if (!espectaculos.containsKey(nombreEspectaculo)) {
 			throw new RuntimeException("El espectaculo no esta registrado.");
 		}
@@ -126,10 +124,14 @@ public class Ticketek implements ITicketek {
 		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, cantidadEntradas);
 		for (IEntrada e : vendidas) {
 			Integer codigo = ((Entrada) e).ObtenerCodEntrada();
-		    usuarios.get(email).agregarEntradas(codigo);			
+			usuarios.get(email).agregarEntradas(codigo);
 		}
 		return vendidas;
 	}
+	
+	
+	// ______________________________________FALTAN_HACER___________________________________________
+
 
 	@Override
 	public List<IEntrada> venderEntrada(String nombreEspectaculo, String fecha, String email, String contrasenia,
