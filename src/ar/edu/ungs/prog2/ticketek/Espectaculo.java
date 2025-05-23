@@ -19,6 +19,18 @@ public class Espectaculo {
 	}
 	
 	
+	protected List<IEntrada> entradasVendidas(){
+		if(!funciones.isEmpty()) {
+			throw new RuntimeException("No hay funciones añadidas para esta este espectaculo");
+		}
+		List<IEntrada> vendidas= new ArrayList<>();
+		for (Funcion f : funciones.values()) {
+			vendidas.addAll(f.entradasVendidas());
+			
+		}return vendidas;
+	}
+	
+	
 	// ACA USAMOS STRING BUILDER PARA CONCATENAR TODAS LAS FUNCIONES DE FORMA MAS EFICIENTE YA QUE LOS STRING SON INMUTABLES 
 	
 	protected String listarFunciones() {

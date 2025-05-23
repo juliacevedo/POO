@@ -3,7 +3,7 @@ package ar.edu.ungs.prog2.ticketek;
 import java.util.HashMap;
 
 public class Entrada implements IEntrada {
-	private String emailDeComprador; // AGREGADO
+	private String emailDeComprador; 
 	private String nombreDeSede;
 	private Integer codEntrada;
 	private Integer codEspectaculo;

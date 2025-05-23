@@ -56,7 +56,7 @@ public class Funcion {
 			if ((sede.devolverCapacidadMax() - sede.sectores[0].obtenerVentas()) < cantidadEntradas) {
 				throw new RuntimeException("No hay suficientes entradas disponibles");
 			}
-			if(entradas.isEmpty()) {
+			if (entradas.isEmpty()) {
 				throw new RuntimeException("No hay entradas registradas");
 			}
 			for (Entrada e : entradas.values()) {
@@ -67,7 +67,7 @@ public class Funcion {
 					sede.obtenerSectores()[0].aumentarVentas();
 				}
 			}
-			
+
 		}
 		return lista;
 	}
@@ -118,10 +118,22 @@ public class Funcion {
 			return " - (" + fecha.toString() + ") " + sede.obtenerNombre() + "" + " - "
 					+ sede.sectores[0].obtenerVentas() + "" + "/" + sede.devolverCapacidadMax() + "\n";
 		}
-		String sectores= sede.sectoresConEntradasVendidas();
-		return " - (" + fecha.toString() + ") " + "" + sede.obtenerNombre()  + " - " + sectores + "\n";
+		String sectores = sede.sectoresConEntradasVendidas();
+		return " - (" + fecha.toString() + ") " + "" + sede.obtenerNombre() + " - " + sectores + "\n";
 	}
 
+	protected List<IEntrada> entradasVendidas() {
+		List<IEntrada> vendidas = new ArrayList<>();
+		if(entradas.isEmpty()) {
+			throw new RuntimeException("La funcion no cuenta con entradas");
+		}
+		for (Entrada e : entradas.values()) {
+			if (!e.disponible()) {
+				vendidas.add(e);
+			}
+		}
+		return vendidas;
+	}
 
-
+	
 }

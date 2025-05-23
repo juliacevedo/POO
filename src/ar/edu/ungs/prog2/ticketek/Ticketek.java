@@ -163,14 +163,20 @@ public class Ticketek implements ITicketek {
 		return espectaculos.get(nombreEspectaculo).listarFunciones();
 	}
 	
-	// ______________________________________FALTAN_HACER___________________________________________
 
 	@Override
 	public List<IEntrada> listarEntradasEspectaculo(String nombreEspectaculo) {
-		// TODO Auto-generated method stub
-		return null;
+		List<IEntrada> vendidas= new ArrayList<>();
+		if (!espectaculos.containsKey(nombreEspectaculo)) {
+			throw new RuntimeException("El espectáculo no está registrado.");
+		}
+		vendidas= espectaculos.get(nombreEspectaculo).entradasVendidas();
+		if( vendidas == null) {
+			throw new RuntimeException("El espectaculo no vendio ninguna entrada");
+		}
+		return vendidas;
 	}
-
+	// ______________________________________FALTAN_HACER___________________________________________
 	@Override
 	public List<IEntrada> listarEntradasFuturas(String email, String contrasenia) {
 		// TODO Auto-generated method stub
