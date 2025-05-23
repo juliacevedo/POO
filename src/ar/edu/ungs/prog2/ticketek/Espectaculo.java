@@ -27,7 +27,7 @@ public class Espectaculo {
 	    	throw new RuntimeException ("No hay funciones registradas para el espectaculo.");
 	    }
 		for (Funcion f : funciones.values()) {
-			sb.append(f.toString()).append("\n");
+			sb.append(f.toString());
 		}
 		return sb.toString(); // Por que devuelve string no stringbuilder.
 	}

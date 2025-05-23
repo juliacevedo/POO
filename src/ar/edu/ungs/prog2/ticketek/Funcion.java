@@ -52,19 +52,22 @@ public class Funcion {
 
 	protected List<IEntrada> venderEntrada(String email, int cantidadEntradas) {
 		List<IEntrada> lista = new ArrayList<>();
-		if ((sede.devolverCapacidadMax() - sede.sectores[0].obtenerVentas()) < cantidadEntradas) {
-			throw new RuntimeException("No hay suficientes entradas disponibles");
-		}
 		if (this.sede instanceof Estadio) {
+			if ((sede.devolverCapacidadMax() - sede.sectores[0].obtenerVentas()) < cantidadEntradas) {
+				throw new RuntimeException("No hay suficientes entradas disponibles");
+			}
+			if(entradas.isEmpty()) {
+				throw new RuntimeException("No hay entradas registradas");
+			}
 			for (Entrada e : entradas.values()) {
 				if (cantidadEntradas > 0 && e.disponible()) {
 					cantidadEntradas--;
-
 					e.emailComprador(email);
 					lista.add(e);
 					sede.obtenerSectores()[0].aumentarVentas();
 				}
 			}
+			
 		}
 		return lista;
 	}
@@ -112,10 +115,11 @@ public class Funcion {
 	@Override
 	public String toString() {
 		if (sede instanceof Estadio) {
-			return "(" + fecha.toString() + ") " + "" + sede.obtenerNombre() + "" + " - "
-					+ sede.sectores[0].obtenerVentas() + "" + "/" + sede.devolverCapacidadMax() + "";
+			return " - (" + fecha.toString() + ") " + sede.obtenerNombre() + "" + " - "
+					+ sede.sectores[0].obtenerVentas() + "" + "/" + sede.devolverCapacidadMax() + "\n";
 		}
-		return "(" + fecha.toString() + ") " + "" + sede.obtenerNombre() + "" + " - ";
+		String sectores= sede.sectoresConEntradasVendidas();
+		return " - (" + fecha.toString() + ") " + "" + sede.obtenerNombre()  + " - " + sectores + "\n";
 	}
 
 

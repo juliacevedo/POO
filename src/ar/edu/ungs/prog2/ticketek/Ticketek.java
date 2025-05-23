@@ -155,11 +155,6 @@ public class Ticketek implements ITicketek {
 		return vendidas;
 	}
 	
-	
-	// ______________________________________FALTAN_HACER___________________________________________
-
-
-
 	@Override
 	public String listarFunciones(String nombreEspectaculo) {
 		if (!espectaculos.containsKey(nombreEspectaculo)) {
@@ -167,6 +162,8 @@ public class Ticketek implements ITicketek {
 		}
 		return espectaculos.get(nombreEspectaculo).listarFunciones();
 	}
+	
+	// ______________________________________FALTAN_HACER___________________________________________
 
 	@Override
 	public List<IEntrada> listarEntradasEspectaculo(String nombreEspectaculo) {

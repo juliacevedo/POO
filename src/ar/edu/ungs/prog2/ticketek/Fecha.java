@@ -28,7 +28,7 @@ public class Fecha {
 	
 	@Override
 	public String toString() {
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 	    return fecha.format(formatter);
 	}
 

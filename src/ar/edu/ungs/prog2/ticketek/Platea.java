@@ -52,7 +52,7 @@ public class Platea extends Sector {
 
 	@Override
 	protected String obtenerSector() {
-		return sector;
+		return super.sector;
 	}
 
 	public ArrayList<Tupla<Integer, Integer>> obtenerAsientos() {
