@@ -1,6 +1,7 @@
 package ar.edu.ungs.prog2.ticketek;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,8 +10,6 @@ public abstract class Sede {
 	protected String direccion;
 	protected int capacidadMaxima;
 	protected Sector[] sectores;
-	protected String sede;
-	protected HashMap<Fecha, String> fechas;
 
 	public Sede(String nombre, String direccion, int capacidadMaxima) {
 		if (capacidadMaxima <= 0) {
@@ -22,6 +21,7 @@ public abstract class Sede {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.capacidadMaxima = capacidadMaxima;
+
 	}
 
 	protected String sectoresConEntradasVendidas() {
@@ -63,10 +63,18 @@ public abstract class Sede {
 
 	public Sector[] obtenerSectores() {
 		return this.sectores;
+		
 	}
 
 	public String obtenerNombre() {
 		return this.nombre;
 	}
 
+	@Override
+	public String toString() {
+		return "Sede nombre" + nombre + ", direccion=" + direccion + ", capacidadMaxima=" + capacidadMaxima
+				+ ", sectores=" + Arrays.toString(sectores) + ", sede=" + ", fechas=" + "]";
+	}
+	
+	
 }

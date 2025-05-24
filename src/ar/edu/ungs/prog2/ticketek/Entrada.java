@@ -1,9 +1,10 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Entrada implements IEntrada {
-	private String emailDeComprador; 
+	private String emailDeComprador;
 	private String nombreDeSede;
 	private Integer codEntrada;
 	private Integer codEspectaculo;
@@ -22,7 +23,7 @@ public class Entrada implements IEntrada {
 		this.fecha = fecha.toString();
 		this.ubicacion = "CAMPO";
 		this.asiento = null;
-		this.emailDeComprador="";
+		this.emailDeComprador = "";
 	}
 
 	public Entrada(String nombreDeSede, int codEspectaculo, String nombreDeEspectaculo, Fecha fecha, String sector,
@@ -41,17 +42,18 @@ public class Entrada implements IEntrada {
 	}
 
 	public boolean disponible() {
-	    return this.emailDeComprador == null || this.emailDeComprador.equals("");
+		return this.emailDeComprador == null || this.emailDeComprador.equals("");
 	}
-	
+
 	protected String obtenerSector() {
 		return this.ubicacion;
 	}
 
-	public int ObtenerCodEntrada() {
+	public Integer obtenerCodEntrada() {
 		return this.codEntrada;
 	}
-	public Tupla<Integer,Integer> obtenerAsiento() {
+
+	public Tupla<Integer, Integer> obtenerAsiento() {
 		return asiento;
 	}
 
@@ -61,15 +63,20 @@ public class Entrada implements IEntrada {
 		return 0;
 	}
 
+	protected boolean entradaVencida() {
+		Fecha hoy= new Fecha();
+		Fecha entrada= new Fecha(this.fecha);
+		return entrada.fechaVencida(hoy);
+	}
+
 	@Override
 	public String ubicacion() {
-		if(asiento==null) {
+		if (asiento == null) {
 			return "CAMPO";
 		}
 		return this.ubicacion + " f:" + asiento.getFila() + " a:" + asiento.getAsiento();
-}
-		
-	
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

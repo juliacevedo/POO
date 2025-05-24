@@ -8,7 +8,7 @@ public class Usuario {
 	private String apellido;
 	private String email;
 	private String contrasenia;
-	private ArrayList<Integer> entradasCompradas;
+	private HashMap<Integer,Entrada> entradasCompradas;
 
 	public Usuario(String email, String nombre, String apellido, String contrasenia) {
 		if (!nombreValido(nombre)) {
@@ -28,7 +28,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.email = email;
 		this.contrasenia = contrasenia;
-		this.entradasCompradas = new ArrayList<>();
+		this.entradasCompradas = new HashMap<>();
 	}
 
 	// Validacion de parametros
@@ -78,23 +78,50 @@ public class Usuario {
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
-			if (!Character.isLetter(c)) {
+			if (!Character.isLetter(c) && s.charAt(i) != ' ') {
 				return false; // No se permite ni dígito ni símbolo
 			}
 		}
 		return true;
 	}
 
+	private String obtenerContrasenia() {
+		return contrasenia;
+	}
+	
 	protected boolean contraseniaValida(String s) {
 		return s.equals(obtenerContrasenia());
 	}
 
-	private String obtenerContrasenia() {
-		return contrasenia;
+	public void agregarEntradas(Integer cod, Entrada e) {
+		entradasCompradas.put(cod,e);
+		
 	}
 
-	public void agregarEntradas(Integer codEntrada) {
-		entradasCompradas.add(codEntrada);
+	protected ArrayList<IEntrada> entradasCompradas() {
+		ArrayList compradas= new ArrayList<>();
+		
+		if(entradasCompradas.isEmpty()) {
+			throw new RuntimeException ("El usuario no compro entradas aun");
+		}
+		for(Entrada e : entradasCompradas.values()) {
+			compradas.add(e);
+		}
+		return compradas;
+		
 	}
-
+	
+	protected  ArrayList<IEntrada> entradasFuturas(){
+		ArrayList<IEntrada> futuras= new ArrayList<>();
+		if(entradasCompradas.isEmpty()) {
+			throw new RuntimeException ("El usuario no compro entradas aun");
+		}
+		for(Entrada e : entradasCompradas.values()) {
+			if(!e.entradaVencida()) {
+				futuras.add(e);
+				
+			}
+		}
+		return futuras;
+	}
 }

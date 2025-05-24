@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.ticketek;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +23,7 @@ public class Funcion {
 	}
 
 	protected Fecha obtenerFecha() {
-		return fecha;
+		return this.fecha;
 	}
 
 	protected Sede devolverSede() {
@@ -33,8 +34,9 @@ public class Funcion {
 		if (this.sede instanceof Estadio) {
 			for (int entrada = 1; entrada <= this.sede.devolverCapacidadMax(); entrada++) {
 				Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha);
-				entradas.put(e.ObtenerCodEntrada(), e);
+				entradas.put(e.obtenerCodEntrada(), e);
 			}
+			
 		} else {
 			for (Sector s : this.sede.obtenerSectores()) {
 				if (s instanceof Platea) {
@@ -42,7 +44,7 @@ public class Funcion {
 					for (Tupla<Integer, Integer> asiento : p.obtenerAsientos()) {
 						Entrada e = new Entrada(this.sede.obtenerNombre(), codigo, nombre, fecha, s.obtenerSector(),
 								asiento);
-						entradas.put(e.ObtenerCodEntrada(), e);
+						entradas.put(e.obtenerCodEntrada(), e);
 					}
 				}
 			}
@@ -62,9 +64,11 @@ public class Funcion {
 			for (Entrada e : entradas.values()) {
 				if (cantidadEntradas > 0 && e.disponible()) {
 					cantidadEntradas--;
+					
 					e.emailComprador(email);
 					lista.add(e);
 					sede.obtenerSectores()[0].aumentarVentas();
+					
 				}
 			}
 

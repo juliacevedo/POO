@@ -29,10 +29,12 @@ public class Platea extends Sector {
 		Integer fila = 1;
 		int control = this.asientosPorFila;
 		for (Integer asiento = 1; asiento <= super.capacidad; asiento++) {
+		    Tupla<Integer, Integer> a = new Tupla<>(fila, asiento);
+			this.asientos.add(a);
 			if (asiento > control) {
 				fila++;
-				control += this.asientosPorFila;			}
-			asientos.add(new Tupla<>(fila, asiento));
+				control += this.asientosPorFila;
+				}
 		}
 
 	}
@@ -57,7 +59,7 @@ public class Platea extends Sector {
 
 	public ArrayList<Tupla<Integer, Integer>> obtenerAsientos() {
 
-		return asientos;
+		return this.asientos;
 	}
 
 }

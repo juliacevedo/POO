@@ -11,8 +11,18 @@ public class Fecha {
 	Fecha(String fecha) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 		this.fecha = LocalDate.parse(fecha, formatter);
+		
 	}
-
+	
+	Fecha(){
+		this.fecha= LocalDate.now();
+		
+	}
+	public LocalDate obtenerFecha() {
+		return this.fecha;
+	}
+	
+	
 	private int obtenerDia() {
 		return fecha.getDayOfMonth();
 	}
@@ -24,6 +34,7 @@ public class Fecha {
 	private int obtenerAnio() {
 		return fecha.getYear();
 	}
+	
 	// Mostrar la fecha como String "dd/MM/yyyy"
 	
 	@Override
@@ -60,5 +71,9 @@ public class Fecha {
 					&&	this.obtenerMes() == otra.obtenerMes()
 					&& this.obtenerAnio() == otra.obtenerAnio());
 	}
-
+	
+	public boolean fechaVencida(Fecha hoy) {
+		return this.fecha.isBefore(hoy.obtenerFecha());
+	}
+	
 }

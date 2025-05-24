@@ -23,5 +23,5 @@ public abstract class Sector {
 	protected void aumentarVentas() {
 		this.ventas++;
 	}
-
+	
 }

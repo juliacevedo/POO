@@ -2,7 +2,10 @@ package ar.edu.ungs.prog2.ticketek;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+
+import javax.print.attribute.standard.MediaSize.Engineering;
 
 public class Ticketek implements ITicketek {
 	private HashMap<String, Usuario> usuarios;
@@ -33,6 +36,7 @@ public class Ticketek implements ITicketek {
 
 		Sede s = new Estadio(nombre, direccion, capacidadMaxima);
 		agregarSede(nombre, s);
+		
 	}
 
 	@Override
@@ -98,6 +102,7 @@ public class Ticketek implements ITicketek {
 			throw new RuntimeException("La fecha esta ocupada");
 		}
 		Funcion f = new Funcion(fecha, sedes.get(sede), precioBase);
+		
 		espectaculos.get(nombreEspectaculo).agregarFuncion(f);
 
 	}
@@ -121,11 +126,16 @@ public class Ticketek implements ITicketek {
 		if (espectaculos.get(nombreEspectaculo).sedeNumerada(fecha)) {
 			throw new RuntimeException("La fecha indicada es para una sede numerada.");
 		}
-		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, cantidadEntradas);
+		Fecha fechaFuncion = new Fecha(fecha);
+
+		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(fechaFuncion).venderEntrada(email, cantidadEntradas);
 		for (IEntrada e : vendidas) {
-			Integer codigo = ((Entrada) e).ObtenerCodEntrada();
-			usuarios.get(email).agregarEntradas(codigo);
+			Entrada entrada = (Entrada) e;
+			usuarios.get(email).agregarEntradas(entrada.obtenerCodEntrada(),entrada);
+			
 		}
+	
+
 		return vendidas;
 	}
 	
@@ -149,8 +159,8 @@ public class Ticketek implements ITicketek {
 		}
 		List<IEntrada> vendidas = espectaculos.get(nombreEspectaculo).obtenerFuncion(new Fecha(fecha)).venderEntrada(email, sector,asientos);
 		for (IEntrada e : vendidas) {
-			Integer codigo = ((Entrada) e).ObtenerCodEntrada();
-			usuarios.get(email).agregarEntradas(codigo);
+			Entrada entrada = (Entrada) e;
+			usuarios.get(email).agregarEntradas(entrada.obtenerCodEntrada(),entrada);
 		}
 		return vendidas;
 	}
@@ -162,7 +172,6 @@ public class Ticketek implements ITicketek {
 		}
 		return espectaculos.get(nombreEspectaculo).listarFunciones();
 	}
-	
 
 	@Override
 	public List<IEntrada> listarEntradasEspectaculo(String nombreEspectaculo) {
@@ -176,18 +185,39 @@ public class Ticketek implements ITicketek {
 		}
 		return vendidas;
 	}
-	// ______________________________________FALTAN_HACER___________________________________________
+	
+	
 	@Override
+	
+	
 	public List<IEntrada> listarEntradasFuturas(String email, String contrasenia) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!usuarios.containsKey(email)) {
+			throw new RuntimeException("El usuario no esta registrado");
+		}
+		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
+			throw new RuntimeException("Contraseña Invalida");
+		}
+		
+		
+		return usuarios.get(email).entradasFuturas();
 	}
-
+	
 	@Override
 	public List<IEntrada> listarTodasLasEntradasDelUsuario(String email, String contrasenia) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!usuarios.containsKey(email)) {
+			throw new RuntimeException("El usuario no esta registrado");
+		}
+		if (!usuarios.get(email).contraseniaValida(contrasenia)) {
+			throw new RuntimeException("Contraseña Invalida");
+		}
+		return usuarios.get(email).entradasCompradas();
 	}
+	
+	
+	
+	// ______________________________________FALTAN_HACER___________________________________________
+	
+	
 
 	@Override
 	public boolean anularEntrada(IEntrada entrada, String contrasenia) {
@@ -231,8 +261,7 @@ public class Ticketek implements ITicketek {
 		return 0;
 	}
 
-	// ____________________________________METODOS
-	// AGREGADOS_________________________________________
+	// ____________METODOS_AGREGADOS______________
 
 	private boolean sedeConMismaDireccion(String direccion) {
 		for (Sede s : sedes.values()) {

@@ -26,8 +26,8 @@ public class Espectaculo {
 		List<IEntrada> vendidas= new ArrayList<>();
 		for (Funcion f : funciones.values()) {
 			vendidas.addAll(f.entradasVendidas());
-			
 		}return vendidas;
+		
 	}
 	
 	
@@ -52,8 +52,9 @@ public class Espectaculo {
 	}
 
 	protected void agregarFuncion(Funcion f) {
-		funciones.put(f.obtenerFecha(), f);
 		f.crearEntradas(codigo,nombre);
+		funciones.put(f.obtenerFecha(), f);
+	
 	}
 
 	protected boolean sedeNumerada(String fecha) {
@@ -64,9 +65,15 @@ public class Espectaculo {
 
 	public int obtenerCodigo() {
 		return codigo;
+		
 	}
+	
+	
 	protected Funcion obtenerFuncion(Fecha f) {
+		
 		return funciones.get(f);
+
 	}
+	
 
 }
